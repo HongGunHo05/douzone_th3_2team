@@ -61,25 +61,60 @@
 
 	<div id="selectList">
 	
+		<!--이달의 메뉴 추천 & 헬스장 운동법 소개-->
 		<article class="MonthMenu" id="s1">
 			<img src="${path}/views/img/getMuscle.jpg" />
 			<div>
 				<table>
 					<th colspan="2">이달의 HOT & SALE 메뉴</th>
 					<tr>
-						<td><img src="${path}/views/img/logo.png" /></td>
-						<td><img src="${path}/views/img/logo.png" /></td>
+						<td onclick="location.href='nutrients?cmd=nutrientsDetail30001'">
+							<img
+							src="https://img.danawa.com/prod_img/500000/426/012/img/2012426_1.jpg?shrink=330:330&_v=20210817132717"
+							width="200" , height="200" />
+							<h4>고려은단 비타민C 1000 600정</h4>
+						</td>
+						<td onclick="location.href='nutrients?cmd=nutrientsDetail30002'">
+							<img
+							src="https://img.danawa.com/prod_img/500000/444/243/img/6243444_1.jpg?shrink=330:330&_v=20200626121658"
+							width="200" , height="200" />
+							<h4>코스트코 커클랜드 슈퍼 B-컴플렉스 500정</h4>
+						</td>
 					</tr>
 					<tr>
-						<td><img src="${path}/views/img/logo.png " /></td>
-						<td><img src="${path}/views/img/logo.png" /></td>
+						<td onclick="location.href='nutrients?cmd=nutrientsDetail30003'">
+							<img
+							src="https://img.danawa.com/prod_img/500000/178/261/img/5261178_1.jpg?shrink=330:330&_v=20200618170729"
+							width="200" , height="200" />
+							<h4>BSN 신타6 초콜렛 밀크쉐이크 2.27kg</h4>
+						</td>
+						<td onclick="location.href='nutrients?cmd=nutrientsDetail30007'">
+							<img
+							src="https://img.danawa.com/prod_img/500000/566/871/img/17871566_2.jpg?shrink=500:500&_v=20220920155658"
+							width="200" , height="200" />
+							<h4>비상썬라이즈 경성건강원 수국잎 열수 추출물 분말 110g</h4>
+						</td>
 					</tr>
 				</table>
 
 				<table id="healthintro">
-					<th>헬스장 및 운동법 소개</th>
+					<th colspan="2">헬스장 소개</th>
 					<tr>
-						<td><img src="${path}/views/img/logo.png" /></td>
+						<td onclick="location.href='./views/jsp/etc/introduce.jsp'">
+							<img
+							src="https://contents.hiltonhotels.jp/ko/h/selhi/hotel_service_20191209111241_main_sp.jpg"
+							width="640" , height="200">
+						</td>
+					</tr>
+
+					<th>운동법 소개</th>
+					<tr>
+						<td><iframe width="640" height="300"
+								src="https://www.youtube.com/embed/TY0HF4SMzhU?autoplay=1&mute=1"
+								title="YouTube video player" frameborder="0"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+								allowfullscreen>
+						</iframe></td>
 					</tr>
 				</table>
 			</div>
