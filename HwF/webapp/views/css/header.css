@@ -1,0 +1,90 @@
+@import
+	url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
+
+html {
+	font-family: "Do Hyeon", sans-serif;
+	scroll-behavior: smooth;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+header div {
+	display: flex;
+	height: 7rem;
+	background-color: lightblue;
+	font-size: 3.5rem;
+}
+
+#headerFirstDiv div {
+	align-items: center;
+}
+
+header div div {
+	margin-left: 3rem;
+}
+
+header div img {
+	width: 11rem;
+}
+
+#loginimg {
+	position: absolute;
+	right: 10%;
+}
+
+#loginimg a:nth-child(1) img {
+	width: 7rem;
+	cursor: pointer;
+}
+
+#loginimg a:nth-child(2) img {
+	width: 5rem;
+	cursor: pointer;
+}
+
+nav {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+nav p {
+	text-align: right;
+	width: 90rem;
+}
+
+nav p input {
+	background-image: url(../img/look.png);
+	background-repeat: no-repeat;
+	background-size: 1.5rem;
+	text-indent: 1.5rem;
+	width: 9.5rem;
+	height: 1.5rem;
+	margin-right: 5rem;
+}
+
+header nav table {
+	border: 1px solid black;
+	width: 80rem;
+	height: 5rem;
+}
+
+header nav table td:hover {
+	background-color: #808080;
+	color:#ffffff;
+}
+
+header nav table td {
+	border: 1px solid black;
+	width: 5rem;
+	text-align: center;
+}
+
+header nav table img {
+	width: 10rem;
+	height: 4.5rem;
+}

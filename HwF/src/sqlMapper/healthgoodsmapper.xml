@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="healthgoodsMapper">
+
+	<!-- 헬스용품 - 전체 조회 -->
+	<select id="healthGoodsList" resultType="healthgoodsdto">
+		select * from healthgoods
+	</select>
+
+	<!-- 헬스용품 - 카테고리 '운동용품' 조회 -->
+	<select id="selectDumbbell" resultType="healthgoodsdto">
+		select * from healthgoods
+		where healthgoodsCategory = 1
+	</select>
+
+	<!-- 헬스용품 - 카테고리 '벨트' 조회 -->
+	<select id="selectBelt" resultType="healthgoodsdto">
+		select * from healthgoods
+		where healthgoodsCategory = 2
+	</select>
+
+	<!-- 헬스용품 - 카테고리 '장갑' 조회 -->
+	<select id="selectGloves" resultType="healthgoodsdto">
+		select * from healthgoods
+		where healthgoodsCategory = 3
+	</select>
+
+	<!-- 헬스용품 - 상세보기 -->
+	<select id="healthGoodsDetail" resultType="healthgoodsdto"
+		parameterType="int">
+		select * from healthgoods where healthGoodsId = #{healthGoodsId}
+	</select>
+
+
+
+	<!-- <mapper namespace="healthgoodsdao"> -->
+
+	<select id="selectAll" resultType="healthgoodsdto">
+		select * from cart
+	</select>
+
+</mapper>

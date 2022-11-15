@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="purchasedao">
+
+	<select id="selectAll" resultType="purchasedto">
+		select * from cart
+	</select>
+
+
+	<!-- 영양제 구매 성공시 데이터 삽입 -->
+	<insert id="insertnutr" parameterType="purchasedto">
+
+		insert into PURCHASE
+		(
+		purchaseid,
+		purchasenum, purchaseprice,
+		purchasemethod, purchasereceipt,
+		purchasedate, receiptstartdate,
+		receiptperiod,
+		healthgoodsid, hfid, nutrientsid,
+		memberid
+		)
+		values
+		(
+		PURCHASE_ID_SEQ.nextval,
+		null, #{purchasePrice},
+		'카드',
+		#{purchaseReceipt},
+		to_date(sysdate, 'yyyy.mm.dd hh24:mi:SS'),
+		to_date(#{receiptStartDate}, 'yyyy.mm.dd hh24:mi:SS'),
+		#{receiptPeriod},
+		null, null, #{nutrientsID}, #{memberID}
+		)
+
+	</insert>
+
+
+	<!-- <insert id="insertnutrCredit" parameterType="purchasedto"> insert into 
+		PURCHASE ( purchaseid, purchasenum, purchaseprice, purchasemethod, purchasereceipt, 
+		purchasedate, receiptstartdate, receiptperiod, healthgoodsid, hfid, nutrientsid, 
+		memberid ) values ( PURCHASE_ID_SEQ.nextval, null, #{purchasePrice}, '신용카드', 
+		#{purchaseReceipt}, to_date(sysdate, 'yyyy.mm.dd hh24:mi:SS'), to_date(#{receiptStartDate}, 
+		'yyyy.mm.dd hh24:mi:SS'), #{receiptPeriod}, null, null, #{nutrientsID}, #{memberID} 
+		) </insert> -->
+
+
+	<!-- 헬스식품 구매 성공시 데이터 삽입 -->
+	<insert id="insertfood" parameterType="purchasedto">
+
+		insert into PURCHASE
+		(
+		purchaseid,
+		purchasenum, purchaseprice,
+		purchasemethod, purchasereceipt,
+		purchasedate, receiptstartdate,
+		receiptperiod,
+		healthgoodsid, hfid, nutrientsid,
+		memberid
+		)
+		values
+		(
+		PURCHASE_ID_SEQ.nextval,
+		#{purchaseNum}, #{purchasePrice},
+		'카드', null,
+		to_date(sysdate, 'yyyy.mm.dd hh24:mi:SS'), null,
+		null,
+		null, #{hfid},
+		null, #{memberID}
+		)
+
+	</insert>
+
+	<!-- 헬스용품 구매 성공시 데이터 삽입 -->
+	<insert id="insertgoods" parameterType="purchasedto">
+
+		insert into PURCHASE
+		(
+		purchaseid,
+		purchasenum, purchaseprice,
+		purchasemethod, purchasereceipt,
+		purchasedate, receiptstartdate,
+		receiptperiod,
+		healthgoodsid, hfid, nutrientsid,
+		memberid
+		)
+		values
+		(
+		PURCHASE_ID_SEQ.nextval,
+		#{purchaseNum}, #{purchasePrice},
+		'카드', null,
+		to_date(sysdate, 'yyyy.mm.dd
+		hh24:mi:SS'), null,
+		null,
+		#{healthgoodsID}, null, null, #{memberID}
+		)
+
+	</insert>
+
+	<!-- 구매 성공 후 장바구니에서 삭제 -->
+	<delete id="deleteDataByMemberId" parameterType="String">
+
+		delete from cart
+		where memberId = #{memberid}
+
+	</delete>
+
+
+	<select id="selectmemberid" resultType="purchasedto"
+		parameterType="String">
+		select purchaseId, memberId, purchaseNum, purchasePrice,
+		purchaseMethod,
+		decode(purchaseReceipt, 1,'즉시', 2,'예약') as
+		purchaseReceipt,
+		to_char(purchaseDate,'yy-mm-dd') as purchaseDate,
+		to_char(receiptStartDate,'yy-mm-dd') as receiptStartDate,
+		receiptPeriod,
+		NVL(to_char(healthgoodsId),'-') as healthgoodsId,
+		NVL(to_char(hfid),'-') as hfid,
+		NVL(to_char(nutrientsID),'-') as
+		nutrientsID
+		from purchase
+		where memberid = #{memberid}
+		order by
+		purchaseId
+	</select>
+
+</mapper>

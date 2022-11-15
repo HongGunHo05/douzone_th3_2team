@@ -1,0 +1,93 @@
+#selectList {
+	display: flex;
+	justify-content: center;
+}
+
+article {
+	display: none;
+	text-align: center;
+}
+
+article div {
+	display: flex;
+	justify-content: center;
+}
+
+article table th {
+	background-color: lightblue;
+}
+
+article table {
+	border: 1px solid black;
+}
+
+.MonthMenu table {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	border-collapse: collapse;
+	width: 40rem;
+}
+
+.MonthMenu tr {
+	height: 3rem;
+	font-size: 1.5rem;
+}
+
+.category table {
+	margin: 5rem;
+	width: 80rem;
+	height: 25rem;
+}
+
+.category table th {
+	height: 4rem;
+	font-size: 1.5rem;
+}
+
+.category td:hover {
+	transform: scale(1.1);
+	cursor: pointer;
+}
+
+#allnutrientsImg {
+	width: 14rem;
+}
+
+/* nutrientsList table start */
+#nutrientsListDiv {
+	display: flex;
+	justify-content: center;
+}
+
+#nutrientsListDiv table {
+	text-align: center;
+	border: 1px solid black;
+	border-collapse: collapse;
+	align-items: center;
+	width: 80rem;
+	margin: 5rem;
+	align-items: center;
+}
+
+#nutrientsListDiv table tr:hover {
+	background-color: lightgray;
+	cursor: pointer;
+}
+
+#nutrientsListDiv table th {
+	background-color: lightblue;
+	font-size: 1.4rem;
+}
+
+#nutrientsListDiv td, #nutrientsListDiv th {
+	border: 1px solid black;
+}
+
+#nutrientsListDiv img {
+	width: 6rem;
+}
+
+footer {
+	background-color: lightblue;
+	height: 5rem;
+}

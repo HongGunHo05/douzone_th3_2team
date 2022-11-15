@@ -1,0 +1,100 @@
+@import
+	url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
+
+html {
+	font-family: "Do Hyeon", sans-serif;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+header div {
+	display: flex;
+	height: 7rem;
+	background-color: lightblue;
+	font-size: 3.5rem;
+}
+
+#headerFirstDiv div {
+	align-items: center;
+}
+
+header div div {
+	margin-left: 3rem;
+}
+
+header div img {
+	width: 7rem;
+}
+
+
+
+/* Admin */
+
+.contentTop {
+	 background-color: #57648C;
+	 align-items: center;
+	 text-align: center;
+}
+
+.contentTop h1 {
+	color:white;
+}
+
+.contentBottom {
+	 background-color: #E5E5E5;
+	 align-items: center;
+	 text-align: center;
+	 margin:auto;
+}
+
+.contentBottom span {
+	color:#57648C;
+}
+
+.contentBottom img:hover {
+	transform: scale(1.1);
+}
+
+.contentBottom .tableTitle {
+	background-color: #C2B4D6;
+} 
+
+
+.contentBottom .row:hover {
+background-color: gray;
+} 
+
+.selectcolumn {
+	margin-top:40px;
+}
+
+.qnatable {
+	/* padding-bottom:40px; */
+	margin-bottom:40px;
+	padding-bottom:-40px;
+}
+
+.thqnatable {
+	margin-top:40px;
+}
+
+/* .nutrientsID, .receiptPeriod, .purchaseReceipt, .receiptStartDate {
+	color:#800080;
+} */
+
+
+
+/* footer */
+
+footer div {
+	display: flex;
+	height: 7rem;
+	background-color: lightblue;
+	font-size: 1rem;
+	text-align:center;
+	justify-content: center; 
+	align-items: center
+}

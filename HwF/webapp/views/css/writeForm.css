@@ -1,0 +1,108 @@
+#selectList {
+	display: flex;
+	justify-content: center;
+}
+
+article {
+	text-align: center;
+}
+
+article div {
+	display: flex;
+	justify-content: center;
+}
+
+article table th {
+	background-color: lightblue;
+}
+
+article table {
+	border: 1px solid black;
+}
+
+.MonthMenu table {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	border-collapse: collapse;
+	width: 40rem;
+}
+
+.MonthMenu th {
+	height: 3rem;
+	font-size: 1.5rem;
+}
+
+.MonthMenu tr {
+	height: 3rem;
+	font-size: 1rem;
+}
+
+/*****************  */
+.healthintro table {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	border-collapse: collapse;
+	width: 40rem;
+}
+
+.healthintro th {
+	height: 3rem;
+	font-size: 1.5rem;
+}
+
+.healthintro tr {
+	height: 3rem;
+	font-size: 1rem;
+}
+
+/*****************  */
+.category table {
+	margin: 5rem;
+	width: 80rem;
+	height: 25rem;
+}
+
+.category table th {
+	height: 4rem;
+	font-size: 1.5rem;
+}
+
+.category td:hover {
+	transform: scale(1.1);
+	cursor: pointer;
+}
+
+#allnutrientsImg {
+	width: 14rem;
+}
+
+#s1, #s2, #s3, #s4, #s7 {
+	display: none;
+}
+
+.main{
+	border: lightgray;
+	width:45rem;
+	height: 20rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0 auto;
+	background-color: lightgray;
+	margin-bottom: 2rem;
+	
+}
+
+textarea {
+	width: 30rem;
+	height: 14rem;
+}
+
+input[type=submit]{
+	float: right;
+}
+
+input[type=text]{
+	margin-top: 2rem;
+}
+

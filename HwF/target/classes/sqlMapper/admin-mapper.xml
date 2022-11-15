@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- mapper dtd 추가해야 <mapper> 등등 sub elemnet 나옴 -->
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="adminMapper">
+
+	<!-- ***** 관리자) 회원 조회 ***** -->
+	<select id="AdminMemberSelect"
+		resultType="com.hwf.model.MemberDTO">
+		<!-- select * from member order by memberId -->
+		select memberId, memberName, decode(memberSex,1,'남', 2,'여') as
+		memberSex
+		from member
+		order by memberId
+	</select>
+
+
+
+	<!-- ***** 관리자) 상품 전체 조회 ***** -->
+
+	<!-- 관리자) 헬스용품 전체 조회 -->
+	<select id="AdminHealthGoodsSelect"
+		resultType="com.hwf.model.HealthGoodsDTO">
+		<!-- select * from healthgoods order by healthgoodsId -->
+		select healthGoodsId, healthGoodsName, healthGoodsPrice,
+		decode(healthGoodsCategory,1,'운동용품', 2,'벨트', 3,'장갑') as
+		healthGoodsCategory, healthGoodsImg, healthGoodsDetail, link
+		from healthgoods
+		order by healthGoodsId
+	</select>
+
+	<!-- 관리자) 헬스식품 전체 조회 -->
+	<select id="AdminHealthFoodSelect"
+		resultType="com.hwf.model.HealthFoodDTO">
+		<!-- select * from healthfood order by hfId -->
+		select hfId, hfName, hfPrice, decode(hfCategory,1,'음식', 2,'음료') as
+		hfCategory, hfImg, hfDetail, to_char(hfDom,'yy-mm-dd') as hfDom, link
+		from healthfood
+		order by hfId
+	</select>
+
+	<!-- 관리자) 영양제 전체 조회 -->
+	<select id="AdminNutrientsSelect"
+		resultType="com.hwf.model.NutrientsDTO">
+		<!-- select * from nutrients order by nutrientsId -->
+		select nutrientsId, nutrientsName, nutrientsPrice,
+		decode(nutrientsCategory,1,'비타민', 2,'헬스 보충제', 3,'다이어트 보조제') as
+		nutrientsCategory, nutrientsImg, nutrientsDetail,
+		to_char(nutrientsDom,'yy-mm-dd') as nutrientsDom, dailyIntake,
+		numPerBottle, remainingNum, link
+		from nutrients
+		order by nutrientsId
+
+	</select>
+
+
+
+	<!-- ***** 관리자) 상품 수정 ***** -->
+
+	<!-- 관리자) 헬스용품 수정 -->
+	<select id="AdminHealthGoodsDetail"
+		resultType="com.hwf.model.HealthGoodsDTO" parameterType="int">
+		select * from healthgoods
+		where healthGoodsId = #{healthGoodsId}
+	</select>
+
+	<update id="AdminHealthGoodsUpdate"
+		parameterType="com.hwf.model.HealthGoodsDTO">
+		update healthgoods set
+		healthGoodsName = #{healthGoodsName},
+		healthGoodsPrice = #{healthGoodsPrice},
+		healthGoodsCategory = #{healthGoodsCategory},
+		healthGoodsImg = #{healthGoodsImg},
+		healthGoodsDetail = #{healthGoodsDetail},
+		link = #{link}
+		where healthGoodsId = #{healthGoodsId}
+	</update>
+
+
+	<!-- 관리자) 헬스식품 수정 -->
+	<select id="AdminHealthFoodDetail"
+		resultType="com.hwf.model.HealthFoodDTO" parameterType="int">
+		select * from healthfood
+		where hfId = #{hfid}
+	</select>
+
+	<update id="AdminHealthFoodUpdate"
+		parameterType="com.hwf.model.HealthFoodDTO">
+		update healthfood set
+		hfName = #{hfName},
+		hfPrice = #{hfPrice},
+		hfCategory = #{hfCategory},
+		hfImg = #{hfIMG},
+		hfDetail = #{hfDetail},
+		hfDom = to_date(#{hfDoM},'yyyy-mm-dd'),
+		link = #{link}
+		where hfId = #{hfid}
+	</update>
+
+
+	<!-- 관리자) 영양제 수정 -->
+	<select id="AdminNutrientsDetail"
+		resultType="com.hwf.model.NutrientsDTO" parameterType="int">
+		select * from nutrients
+		where nutrientsId = #{nutrientsId}
+	</select>
+
+	<update id="AdminNutrientsUpdate"
+		parameterType="com.hwf.model.NutrientsDTO">
+		update nutrients set
+		nutrientsName = #{nutrientsName},
+		nutrientsPrice = #{nutrientsPrice},
+		nutrientsCategory = #{nutrientsCategory},
+		nutrientsImg = #{nutrientsIMG},
+		nutrientsDetail = #{nutrientsDetail},
+		nutrientsDom = to_date(#{nutrientsDOM},'yyyy-mm-dd'),
+		dailyIntake = #{dailyInTake},
+		numPerBottle = #{numperbottle},
+		remainingNum = #{remainingNum},
+		link = #{link}
+		where nutrientsId = #{nutrientsID}
+	</update>
+
+
+
+	<!-- ***** 관리자) 상품 삭제 ***** -->
+
+	<!-- 관리자) 헬스용품 삭제 -->
+	<delete id="AdminHealthGoodsDelete" parameterType="int">
+		delete from healthgoods
+		where healthGoodsId = #{healthGoodsId}
+	</delete>
+
+	<!-- 관리자) 헬스식품 삭제 -->
+	<delete id="AdminHealthFoodDelete" parameterType="int">
+		delete from healthfood
+		where hfId = #{hfid}
+	</delete>
+
+	<!-- 관리자) 영양제 삭제 -->
+	<delete id="AdminNutrientsDelete" parameterType="int">
+		delete from nutrients
+		where nutrientsId = #{nutrientsID}
+	</delete>
+
+
+
+	<!-- ***** 관리자) 상품 등록 ***** -->
+
+	<!-- 관리자) 헬스용품 등록 -->
+	<insert id="AdminHealthGoodsInsert"
+		parameterType="com.hwf.model.HealthGoodsDTO">
+		insert into healthgoods(healthGoodsId, healthGoodsName, healthGoodsPrice,
+		healthGoodsCategory, healthGoodsImg, healthGoodsDetail, link)
+		values(healthgoods_id_seq.nextval, #{healthGoodsName},
+		#{healthGoodsPrice}, #{healthGoodsCategory}, #{healthGoodsImg},
+		#{healthGoodsDetail}, #{link})
+	</insert>
+
+	<!-- 관리자) 헬스식품 등록 -->
+	<insert id="AdminHealthFoodInsert"
+		parameterType="com.hwf.model.HealthFoodDTO">
+		insert into healthfood(hfId, hfName, hfPrice,
+		hfCategory, hfImg, hfDetail, hfDom, link)
+		values(hf_id_seq.nextval, #{hfName}, #{hfPrice}, #{hfCategory}, #{hfIMG}, #{hfDetail},
+		to_date(#{hfDoM},'yyyy-mm-dd'), #{link})
+	</insert>
+
+	<!-- 관리자) 영양제 등록 -->
+	<insert id="AdminNutrientsInsert"
+		parameterType="com.hwf.model.NutrientsDTO">
+		insert into nutrients(nutrientsId, nutrientsName,
+		nutrientsPrice, nutrientsCategory, nutrientsImg, nutrientsDetail,
+		nutrientsDom, dailyIntake, numPerBottle, remainingNum, link)
+		values(nutrients_id_seq.nextval, #{nutrientsName}, #{nutrientsPrice},
+		#{nutrientsCategory}, #{nutrientsIMG}, #{nutrientsDetail},
+		to_date(#{nutrientsDOM},'yyyy-mm-dd'), #{dailyInTake},
+		#{numperbottle}, #{remainingNum}, #{link})
+	</insert>
+
+
+
+	<!-- ***** 관리자) 주문 조회 ***** -->
+	
+	<!-- 관리자) 전체 주문 조회 -->
+	<select id="AdminOrderSelect" resultType="purchasedto">
+		<!-- select * from purchase -->
+		select purchaseId, memberId, purchaseNum, purchasePrice,
+		purchaseMethod,
+		decode(purchaseReceipt, 1,'즉시', 2,'예약') as purchaseReceipt,
+		to_char(purchaseDate,'yy-mm-dd') as purchaseDate,
+		to_char(receiptStartDate,'yy-mm-dd') as
+		receiptStartDate,
+		receiptPeriod,
+		NVL(to_char(healthgoodsId),'-') as
+		healthgoodsId, NVL(to_char(hfid),'-') as hfid,
+		NVL(to_char(nutrientsID),'-') as nutrientsID
+		from purchase
+		order by purchaseId
+	</select>
+	
+	<!-- 관리자) 헬스용품 주문 조회 -->
+	<!-- <select id="HealthGoodsOrderSelect" resultType="purchasedto">>
+		select purchaseId, memberId, purchasePrice, healthgoodsId, purchaseDate
+		from purchase
+		where healthgoodsId is not null
+		order by purchaseId
+	</select> -->
+
+</mapper>

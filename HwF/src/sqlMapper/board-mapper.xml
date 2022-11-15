@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- boardmapper.xml DML 명령 처리 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao">
+
+	<!-- 관리자 1:1 문의(전체) -->
+	<select id="selectAll" resultType="qnadto">
+		select * from QnA order by
+		qnaid desc
+	</select>
+
+	<!-- 게시글 삽입 / 고객용(client) -->
+	<insert id="insert" parameterType="qnadto">
+		insert into QnA(qnaId,
+		qnadate, qnatitle, qnacontent, qnaanswer, memberid)
+		values(qna_id_seq.nextval,
+		sysdate , #{qnatitle}, #{qnacontent}, ' '
+		,#{memberid})
+	</insert>
+
+	<!-- 게시글 삽입 / 고객용(client / memberwriteboard -->
+	<insert id="memberwriteboard" parameterType="qnadto">
+		insert into QnA(qnaId,
+		qnadate, qnatitle, qnacontent, qnaanswer, memberid)
+		values(qna_id_seq.nextval,
+		sysdate , #{qnatitle}, #{qnacontent}, ' '
+		,#{memberid})
+	</insert>
+
+
+	<!-- 고객 1:1 문의 게시글로 들어가기(keyvalud - memberid는 세션에서 받아서 쓰게 해야함) -->
+	<select id="selectSearch" parameterType="hashMap"
+		resultType="qnadto">
+
+		SELECT * FROM qna
+		<if test="column != null">
+			where ${column} like '%' || #{keyvalue} || '%' order by
+			qnaid desc
+		</if>
+	</select>
+
+	<!-- 고객 1:1 문의 게시글 조회(keyvalud - memberid는 세션에서 받아서 쓰게 해야함) / member에서 받아온다 -->
+	<select id="MemeberselectSearch" parameterType="hashMap"
+		resultType="qnadto">
+
+		SELECT * FROM qna
+		where ${column} like '%' || #{keyvalue} || '%' and memberid = #{memberid}
+		order by
+		qnaid desc
+
+	</select>
+
+
+	<!-- 전체 검색(검색창에 엔터만 입력할 경우 출력) -->
+	<select id="serachAll" resultType="searchdto">
+		select * from healthgoods,
+		healthfood, nutrients
+	</select>
+
+	<select id="HealthGoodsSelect" resultType="searchdto">
+		select * from
+		healthgoods order by healthgoodsid desc
+
+	</select>
+	<select id="HealthFoodSelect" resultType="searchdto">
+		select * from
+		healthfood order by hfid desc
+
+	</select>
+	<select id="NutrientsSelect" resultType="searchdto">
+		select * from nutrients
+		order by nutrientsID desc
+	</select>
+
+
+	<!-- 부분 검색(특정 단어 입력할 경우 출력) -->
+	<select id="searching" parameterType="hashMap"
+		resultType="searchdto">
+		<if test="column != null">
+			select * from healthgoods where healthgoodsName like '%'
+			|| #{keyvalue} ||
+			'%' order by healthgoodsid desc
+		</if>
+	</select>
+
+
+	<select id="searchingHealthGoodsSelect" parameterType="hashMap"
+		resultType="searchdto">
+		<if test="column != null">
+			select * from healthgoods where healthgoodsName like '%'
+			|| #{keyvalue} ||
+			'%' order by healthgoodsid desc
+		</if>
+	</select>
+
+	<select id="searchingHealthFoodSelect" parameterType="hashMap"
+		resultType="searchdto">
+		<if test="column != null">
+			select * from HealthFood where hfname like '%' ||
+			#{keyvalue} ||
+			'%' order by hfid desc
+		</if>
+	</select>
+
+
+	<select id="searchingNutrientsSelect" parameterType="hashMap"
+		resultType="searchdto">
+		<if test="column != null">
+			select * from Nutrients where nutrientsName like '%' ||
+			#{keyvalue} ||
+			'%' order by nutrientsID desc
+		</if>
+	</select>
+
+	<!-- 추천을 통한 상품 리스트 출력 / 설문, 인바디 -->
+
+	<select id="suverysearchingHealthGoods" parameterType="hashMap"
+		resultType="recommend">
+
+		<if test="column != null">
+
+			select * from HealthGoods where link = #{keyvalue} or link='둘다'
+
+		</if>
+	</select>
+
+	<select id="inbodysearchingHealthGoods" parameterType="hashMap"
+		resultType="recommend">
+
+		<if test="column != null">
+			select * from HealthGoods where link = #{keyvalue} or link='둘다'
+
+
+		</if>
+	</select>
+
+	<select id="suverysearchingHealthFood" parameterType="hashMap"
+		resultType="recommend">
+
+
+		<if test="column != null">
+			select * from healthfood where link = #{keyvalue} or link='둘다'
+
+		</if>
+	</select>
+
+	<select id="inbodysearchingHealthFood" parameterType="hashMap"
+		resultType="recommend">
+		<if test="column != null">
+
+			select * from healthfood where link = #{keyvalue} or link='둘다'
+
+		</if>
+	</select>
+
+	<select id="suverysearchingNutrients" parameterType="hashMap"
+		resultType="recommend">
+
+
+		<if test="column != null">
+			select * from Nutrients where link = #{keyvalue} or link='둘다'
+
+		</if>
+	</select>
+
+	<select id="inbodysearchingNutrients" parameterType="hashMap"
+		resultType="recommend">
+
+		<if test="column != null">
+			select * from Nutrients where link = #{keyvalue} or
+			link='둘다'
+
+		</if>
+	</select>
+
+
+
+	<!-- admin 답변 기능 / qna에서 answer만 update로 삽입 -->
+	<update id="adminupdate" parameterType="qnadto">
+		update qna set
+		qnaanswer = #{qnaanswer} where qnaid = #{qnaid}
+	</update>
+
+
+
+	<!-- 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM QnA WHERE qnaid =
+		#{qnaid}
+	</delete>
+
+	<!-- 세부사항 -->
+	<select id="detailList" resultType="qnadto" parameterType="int">
+		select * from QnA where qnaid = #{qnaid}
+	</select>
+
+
+
+	<!-- 부분 탐색(품목별 탐색하게 할 것 / 게시글이랑 search에 적용필요) -->
+	<select id="selectSearch2" parameterType="hashMap"
+		resultType="qnadto">
+		SELECT * FROM QnA
+		<where>
+			<if test="qnatitle != null">
+				qnatitle = #{keyvalue}
+			</if>
+			<if test="qnacontent != null">
+				or qnacontent = #{keyvalue}
+			</if>
+			<if test="memberid != null">
+				or memberid = #{keyvalue}
+			</if>
+		</where>
+	</select>
+
+
+</mapper>

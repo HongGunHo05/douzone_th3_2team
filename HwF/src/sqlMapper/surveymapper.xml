@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="surveydao">
+
+	<select id="serachAll" resultType="surveydto"
+		parameterType="String">
+		select * from survey where memberid =
+		#{memberid}
+	</select>
+
+	<insert id="insert" parameterType="surveydto">
+		insert into survey
+		values(Survey_ID_SEQ.nextval,#{goal},#{currentstate},
+		#{currentintke},#{link},#{memberid})
+	</insert>
+
+	<delete id="delete" parameterType="int">
+		delete from Survey
+		where SurveyId = #{surveyid}
+	</delete>
+	
+</mapper>
